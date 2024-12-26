@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather Checking Online</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+      font-family: Arial, sans-serif;
+    }
+    .container {
+      text-align: center;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    .title {
+      font-size: 24px;
+      margin-bottom: 30px; /* Increased margin between text and input */
+    }
+    .input-container {
+      margin-bottom: 30px; /* Increased margin between input and button */
+    }
+    input[type="text"] {
+      padding: 10px;
+      font-size: 16px;
+      width: 80%;
+      margin: 10px 0;
+      border: 1px solid #ccc; /* Matches the button border */
+      border-radius: 5px;
+      outline: none; /* Removes input outline */
+    }
+    button {
+      padding: 8px 12px; /* Adjusted button padding */
+      font-size: 16px;
+      color: black;
+      background-color: white;
+      border: 1px solid #ccc; /* Matches input border */
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #f1f1f1;
+    }
+    .loading-bar {
+      width: 0;
+      height: 10px;
+      background: linear-gradient(to right, #0f0, #0a0);
+      border-radius: 5px;
+      margin: 20px auto;
+      transition: width 2s;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      z-index: 1000;
+      width: 60%; /* Wider popup */
+    }
+    .popup p {
+      margin-bottom: 20px; /* Spacing below popup text */
+      font-size: 18px;
+    }
+    .popup button {
+      margin: 10px 0; /* Matches main button's spacing */
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">Weather Checking Online</div>
+    <div class="input-container">
+      <input type="text" id="location" placeholder="Enter location">
+      <button id="checkWeather">Check Weather</button>
+    </div>
+    <div class="loading-bar" id="loadingBar"></div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  <div class="popup" id="popup">
+    <p>Just look outside</p>
+    <button id="closePopup">Close</button>
+  </div>
+
+  <script>
+    const checkWeatherButton = document.getElementById("checkWeather");
+    const loadingBar = document.getElementById("loadingBar");
+    const inputContainer = document.querySelector(".input-container");
+    const popup = document.getElementById("popup");
+    const overlay = document.getElementById("overlay");
+    const closePopupButton = document.getElementById("closePopup");
+
+    checkWeatherButton.addEventListener("click", () => {
+      inputContainer.style.display = "none";
+      loadingBar.style.width = "100%";
+
+      setTimeout(() => {
+        loadingBar.style.width = "0";
+        popup.style.display = "block";
+        overlay.style.display = "block";
+      }, 2000);
+    });
+
+    closePopupButton.addEventListener("click", () => {
+      popup.style.display = "none";
+      overlay.style.display = "none";
+      inputContainer.style.display = "block";
+    });
+  </script>
+</body>
+</html>
